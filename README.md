@@ -177,7 +177,7 @@ python -m src.app.demo_one_item
 ```bash
 python -m src.app.run_daily_planning --top_n 20
 ```
-若成功執行會呈現以下效果
+#### 若成功執行會呈現以下效果
 
 <img width="512" height="746" alt="image" src="https://github.com/user-attachments/assets/7b92d8be-57ad-4331-b7ea-b7db014fd752" />
 
