@@ -96,12 +96,14 @@ scm-ai-agents/
 │  │  ├─ train_baseline.py
 │  │  └─ forecast_service.py
 │  ├─ agents/
-│  │  ├─ rules.py
 │  │  ├─ tools.py
 │  │  ├─ base.py
 │  │  └─ domain_agents.py
+│  ├─ inventory/
+│  │  └─ rules.py
 │  └─ app/
 │     ├─ demo_one_item.py
+│     ├─ run_agents_planning.py
 │     ├─ run_daily_planning.py
 │     └─ dashboard.py
 └─ requirements.txt
