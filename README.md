@@ -83,31 +83,35 @@ calendar.csv
 ```text
 scm-ai-agents/
 ├─ data/
-│  ├─ raw/                 # 放 M5 原始資料 (需自行下載)
+│  ├─ raw/                         # 放 M5 原始資料（需自行從 Kaggle 下載）
 │  └─ processed/
-│     └─ daily_sales.csv   # 處理後的主資料表
+│     └─ daily_sales.csv           # 整理後的「日銷量主表」（後續訓練與預測都用這張）
 ├─ models/
-│  └─ lgbm_baseline.pkl    # 訓練後需求預測模型
+│  └─ lgbm_baseline.pkl            # 訓練好的 LightGBM 需求預測模型
 ├─ src/
 │  ├─ data_prep/
-│  │  └─ build_dataset.py
+│  │  └─ build_dataset.py          # 從 M5 raw 資料組合、清洗，產生 daily_sales.csv
+│  │
 │  ├─ forecasting/
-│  │  ├─ features.py
-│  │  ├─ train_baseline.py
-│  │  └─ forecast_service.py
+│  │  ├─ features.py               # 特徵工程：日期特徵、lag、rolling 等特徵的建立
+│  │  ├─ train_baseline.py         # 使用 daily_sales + features 訓練 LightGBM baseline，並存成 lgbm_baseline.pkl
+│  │  └─ forecast_service.py       # 封裝預測邏輯：載入模型與資料，提供 forecast_item() 等預測介面
+│  │
 │  ├─ agents/
-│  │  ├─ tools.py
-│  │  ├─ base.py
-│  │  └─ domain_agents.py
+│  │  ├─ tools.py                  # 把「預測模型 + 庫存規則」包成 PlanningTools，提供 analyze_item() 等高階工具
+│  │  ├─ base.py                   # 通用 LLM Agent 基底類別：負責呼叫 OpenAI API、處理訊息與回覆
+│  │  └─ domain_agents.py          # 定義實際使用的三個 Agent：需求分析、庫存規劃、主管報告等角色與 prompt
+│  │
 │  ├─ inventory/
-│  │  └─ rules.py
+│  │  └─ rules.py                  # 純規則的庫存邏輯：計算安全庫存、預期剩餘庫存、風險等級與建議補貨量
+│  │
 │  └─ app/
-│     ├─ demo_one_item.py
-│     ├─ run_agents_planning.py
-│     ├─ run_daily_planning.py
-│     └─ dashboard.py
-└─ requirements.txt
-````
+│     ├─ demo_one_item.py          # 指令列 demo：針對單一商品顯示預測結果與庫存決策（方便說明流程）
+│     ├─ run_agents_planning.py    # 指令列 demo：結合 Agents，產生文字版「主管報告」（不透過 dashboard）
+│     ├─ run_daily_planning.py     # 指令列 demo：跑完所有商品風險，列出 Top N 高風險品項與補貨建議
+│     └─ dashboard.py              # Streamlit 前端：顯示高/中/低風險表格＋按鈕呼叫 AI Agents 產生中文主管報告
+│
+└─ requirements.txt                # 專案所需 Python 套件列表，方便一鍵安裝與環境重現
 
 ---
 
