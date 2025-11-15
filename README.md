@@ -1,4 +1,3 @@
-```markdown
 # SCM AI Agents  
 ### 需求預測 × 庫存風險分析 × AI 多代理決策助理
 
