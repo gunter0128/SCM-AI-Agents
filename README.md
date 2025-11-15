@@ -1,14 +1,3 @@
-懂，你說得很準：我上面那份 README 內容完整，但 **Markdown 的縮排、標題層級、程式區塊、清單格式有些不一致**，貼進 GitHub 會有排版錯位。
-
-下面我幫你重新整理成 **100% 乾淨、層級一致、GitHub 呈現漂亮的 README**。
-你可以直接整份複製貼上 `README.md`。
-
----
-
-# ✅ **完全修正版 README（排版乾淨、Markdown 統一、GitHub 呈現漂亮）**
-
----
-
 ```markdown
 # SCM AI Agents  
 ### 需求預測 × 庫存風險分析 × AI 多代理決策助理
