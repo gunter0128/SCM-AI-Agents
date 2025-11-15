@@ -1,0 +1,22 @@
+# Python venv
+venv/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# Environment variables
+.env
+
+# OS files
+.DS_Store
+
+# Streamlit cache
+.streamlit/
+
+
+# Model output
+models/
+
+# 不把原始的大型資料集放進 Git
+data/raw/
