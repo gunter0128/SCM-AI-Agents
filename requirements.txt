@@ -1,0 +1,18 @@
+# ---- 基本科學運算 ----
+pandas==2.2.1
+numpy==1.26.4
+
+# ---- 時間序列與模型 ----
+lightgbm==4.3.0
+scikit-learn==1.4.1.post1
+joblib==1.3.2
+
+# ---- 前端 Dashboard ----
+streamlit==1.31.0
+
+# ---- LLM Agents / OpenAI ----
+openai==1.14.2
+python-dotenv==1.0.1
+
+# ---- 實用工具 ----
+tqdm==4.66.2
