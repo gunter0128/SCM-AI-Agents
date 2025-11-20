@@ -28,17 +28,8 @@
 **讓主管快速知道我能將資料→模型→規則→LLM→前端整合成一套可用的系統。**
 
 ---
-懂！
-你的主管要的是：
-**Problem / Input / Output 三段式的快速摘要（讓外行一看就懂你的 Side Project 在幹嘛）。**
 
-我現在會依照你 SCM AI Agents 專案的內容，**完全套用你給的格式範本（Problem / Input / Output / 使用資料集）** 幫你寫一份正式、乾淨、主管會喜歡的版本。
-
-你可以直接貼回 README「快速總覽」區。
-
----
-
-# ✅ **SCM AI Agents 專案：快速總覽（Problem / Input / Output）**
+#  **SCM AI Agents 專案：快速總覽（Problem / Input / Output）**
 
 ```markdown
 ## 專案快速總覽（Problem / Input / Output）
