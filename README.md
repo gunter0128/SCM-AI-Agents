@@ -29,13 +29,11 @@
 
 ---
 
-#  **SCM AI Agents 專案：快速總覽（Problem / Input / Output）**
-
-## 專案快速總覽（Problem / Input / Output）
+#  **2. SCM AI Agents 專案：快速總覽（Problem / Input / Output）**
 
 ---
 
-## 要解決的問題（Problem）
+## 2.1 要解決的問題（Problem）
 
 供應鏈現場常面臨以下痛點：
 
@@ -50,9 +48,9 @@
 
 ---
 
-## 系統輸入（Input）
+## 2.2 系統輸入（Input）
 
-### 1. 歷史銷量資料（M5 Dataset）
+### 2.2.1 歷史銷量資料（M5 Dataset）
 每筆包含：
 
 - `date`（每日）
@@ -62,14 +60,14 @@
 - `sell_price`（售價）
 - `event_name` / `event_type`（節慶/促銷資訊）
 
-### 2. 庫存結構（自建資料）
+### 2.2.2 庫存結構（自建資料）
 每項商品包含：
 
 - `current_inventory`（目前庫存量）
 - `lead_time_days`（補貨到貨需時）
 - `safety_stock`（安全庫存）
 
-### 3. 使用者操作（輸入）
+### 2.2.3 使用者操作（輸入）
 - 可選擇任一商品，查看：
   - 預測未來 14 天需求  
   - 缺貨風險  
@@ -79,9 +77,9 @@
 
 ---
 
-## 系統輸出（Output）
+## 2.3 系統輸出（Output）
 
-### 1. 商品層級（Per Item）
+### 2.3.1 商品層級（Per Item）
 - 未來 14 天每日需求預測（由 LightGBM 基準模型產生）
 - 安全庫存與補貨基準
 - 缺貨風險分類：**高 / 中 / 低**
@@ -91,12 +89,12 @@
   - 「未來需求是多少？」
   - 「預計什麼時候會缺貨？」
 
-### 2. 全品項摘要（Top-N）
+### 2.3.2 全品項摘要（Top-N）
 - 今日最危險的 Top N 商品
 - 每項風險原因（例：庫存不足、未來需求上升）
 - 補貨清單（商品、數量、建議下單日）
 
-### 3. AI 主管報告（Multi-Agent LLM）
+### 2.3.3 AI 主管報告（Multi-Agent LLM）
 按下按鈕後輸出：
 
 - 今日營運摘要（人類主管口吻）
@@ -109,26 +107,26 @@
 > 「今日共有 12 項商品屬於高風險，其中 *HOUSEHOLD_1_009* 預計在 4 天後缺貨，建議立即補貨 28 單位。近期需求因周末效應上升，保持較高安全水位較為合適。」
 ---
 
-## 2. 系統架構概觀
+## 3. 系統架構概觀
 
 整體分為四層：
 
-### **2.1 資料處理層（Data Prep）**
+### **3.1 資料處理層（Data Prep）**
 - 使用 M5 Dataset 的銷量、價格、節日資料  
 - 整理成 `daily_sales.csv`（date × store × item）
 
-### **2.2 需求預測層（Forecasting）**
+### **3.2 需求預測層（Forecasting）**
 - 特徵工程（日期特徵、lag、rolling）
 - LightGBM 回歸模型
 - 預測未來 14 天每日需求
 
-### **2.3 庫存決策層（Inventory Rules）**
+### **3.3 庫存決策層（Inventory Rules）**
 - 使用 safety stock / lead time / 預期需求計算：
   - 是否缺貨
   - 風險等級（HIGH / MEDIUM / LOW）
   - 建議補貨量（reorder_qty）
 
-### **2.4 AI Agents 層（LLM 多代理）**
+### **3.4 AI Agents 層（LLM 多代理）**
 - Demand Analyst Agent  
 - Inventory Planner Agent  
 - Supervisor Report Agent  
@@ -137,7 +135,7 @@
 
 ---
 
-## 3. 使用資料集：M5 Forecasting（Kaggle）
+## 4. 使用資料集：M5 Forecasting（Kaggle）
 
 資料集來源：  
 https://www.kaggle.com/competitions/m5-forecasting-accuracy/data
@@ -158,7 +156,7 @@ calendar.csv
 
 ---
 
-## 4. 專案目錄結構
+## 5. 專案目錄結構
 
 ```text
 scm-ai-agents/
@@ -196,9 +194,9 @@ scm-ai-agents/
 
 ---
 
-## 5. 如何重現專案
+## 6. 如何重現專案
 
-### **5.1 建立環境**
+### **6.1 建立環境**
 
 ```bash
 git clone https://github.com/<your-account>/scm-ai-agents.git
@@ -214,7 +212,7 @@ pip install -r requirements.txt
 
 ---
 
-### **5.2 放置資料集**
+### **6.2 放置資料集**
 
 手動將 M5 資料放到：
 
@@ -224,7 +222,7 @@ data/raw/
 
 ---
 
-### **5.3 建立處理後資料表**
+### **6.3 建立處理後資料表**
 
 ```bash
 python -m src.data_prep.build_dataset
@@ -238,7 +236,7 @@ data/processed/daily_sales.csv
 
 ---
 
-### **5.4 訓練需求預測模型**
+### **6.4 訓練需求預測模型**
 
 ```bash
 python -m src.forecasting.train_baseline
@@ -252,7 +250,7 @@ models/lgbm_baseline.pkl
 
 ---
 
-### **5.5 測試單一商品（指令列 Demo）**
+### **6.5 測試單一商品（指令列 Demo）**
 
 ```bash
 python -m src.app.demo_one_item
@@ -260,7 +258,7 @@ python -m src.app.demo_one_item
 
 ---
 
-### **5.6 跑每日風險報告**
+### **6.6 跑每日風險報告**
 
 ```bash
 python -m src.app.run_daily_planning --top_n 20
@@ -268,7 +266,7 @@ python -m src.app.run_daily_planning --top_n 20
 
 ---
 
-### **5.7 啟動 Streamlit Dashboard**
+### **6.7 啟動 Streamlit Dashboard**
 
 ```bash
 streamlit run src/app/dashboard.py
@@ -283,7 +281,7 @@ streamlit run src/app/dashboard.py
 
 ---
 
-### **5.8（選配）啟動 AI Agents 中文報告**
+### **6.8（選配）啟動 AI Agents 中文報告**
 
 建立 `.env`：
 
@@ -293,16 +291,16 @@ OPENAI_API_KEY=sk-xxxx
 
 ---
 
-## 6. 模型與規則的可解釋性設計
+## 7. 模型與規則的可解釋性設計
 
-### **6.1 需求預測模型（LightGBM）**
+### **7.1 需求預測模型（LightGBM）**
 
 * 日期特徵（weekday/month）
 * lag 特徵（過去 7 / 14）
 * rolling 特徵（平均、標準差）
 * 時間切割 train/valid/test
 
-### **6.2 庫存規則（rules.py）**
+### **7.2 庫存規則（rules.py）**
 
 **預期剩餘庫存**
 
@@ -331,7 +329,7 @@ reorder_qty = max(0, target_stock - current_inventory)
 
 ---
 
-## 7. 企業價值（Business Impact）
+## 8. 企業價值（Business Impact）
 
 本專案對企業的價值：
 
