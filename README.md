@@ -107,34 +107,6 @@
 
 > 範例（節錄）：  
 > 「今日共有 12 項商品屬於高風險，其中 *HOUSEHOLD_1_009* 預計在 4 天後缺貨，建議立即補貨 28 單位。近期需求因周末效應上升，保持較高安全水位較為合適。」
-
----
-
-## 使用資料集：M5 Forecasting（Kaggle）
-
-本專案使用零售業真實資料集 M5，包含：
-
-- `sales_train_validation.csv`（每日銷量）
-- `sales_train_evaluation.csv`
-- `sell_prices.csv`（不同商品/門市的動態價格）
-- `calendar.csv`（節日、促銷、特殊事件）
-
-資料來源：  
-https://www.kaggle.com/competitions/m5-forecasting-accuracy/data
-
-因原始資料（100MB+）無法放入 GitHub，需自行下載至：
-
-data/raw/
-
-
-### 處理後資料格式（daily_sales.csv）
-
-| date       | store_id | item_id | sales_qty | price | event_type |
-|-----------|----------|---------|-----------|-------|------------|
-| 2016-01-01 | CA_1     | HOBBIES_1_001 | 2 | 8.3 | NaN |
-
-該資料為後續 **特徵工程、模型訓練、風險計算** 的主資料表。
-
 ---
 
 ## 2. 系統架構概觀
