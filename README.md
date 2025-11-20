@@ -31,7 +31,6 @@
 
 #  **SCM AI Agents 專案：快速總覽（Problem / Input / Output）**
 
-```markdown
 ## 專案快速總覽（Problem / Input / Output）
 
 ---
@@ -125,11 +124,8 @@ https://www.kaggle.com/competitions/m5-forecasting-accuracy/data
 
 因原始資料（100MB+）無法放入 GitHub，需自行下載至：
 
-```
-
 data/raw/
 
-```
 
 ### 處理後資料格式（daily_sales.csv）
 
